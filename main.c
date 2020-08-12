@@ -2,37 +2,30 @@
 #include "stack.h"
 #include "queue.h"
 #include "linked_list.h"
-#include "hash_table.h"
+#include "table.h"
+
+
+#define NUMBER_OF_NODES 30
 
 int main() {
-	DirectAdressTable table = createDirectAddressTable();
-	HashItem item0 = createHashItem(0, 'a');
-	HashItem item1 = createHashItem(16, 'b');
-	HashItem item2 = createHashItem(0, 'c');
-	HashItem item3 = createHashItem(-1, 'd');
-	HashItem item4 = createHashItem(30, 'a');
-	int success;
-	success = directAddressInsert(&table, &item0);
-	if (success == 1) {
-		printf("Inserted item with key %d\n", item0.key);
+	DoubleLinkedNode nodes[NUMBER_OF_NODES];
+	for (int i = 0; i < NUMBER_OF_NODES; i++)
+	{
+		nodes[i] = createDoubleLinkedNode(i, 'a' + i);
 	}
-	else {
-		printf("Failed to insert item with key %d\n", item0.key);
+	ChainedHashTable table = createChainedHashTable();
+	for (int i = 0; i < NUMBER_OF_NODES; i++)
+	{
+		chainedHashTableInsert(&table, &(nodes[i]));
 	}
-	success = directAddressInsert(&table, &item1);
-	if (success == 1) {
-		printf("Inserted item with key %d\n", item1.key);
-	}
-	else {
-		printf("Failed to insert item with key %d\n", item1.key);
-	}
-	HashItem* searchedItem = directAddressSearch(&table, 0);
-	if (searchedItem == NULL) {
-		printf("Could not find item.\n");
+	DoubleLinkedNode* searchedNode = chainedHashTableSearch(&table, 21);
+	if (searchedNode == NULL) {
+		printf("Node was not found.");
 	}
 	else
 	{
-		printf("key: %d , c: %c", searchedItem->key, searchedItem->c);
+		printf("c: %c", searchedNode->c);
 	}
+
 	return 0;
 }

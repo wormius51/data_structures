@@ -1,20 +1,13 @@
-#ifndef HASH_TABLE
-#define HASH_TABLE
-#define HASH_TABLE_SIZE 20
-
-typedef struct hashItem {
-	int key;
-	char c;
-} HashItem;
+#ifndef DIRECT_ADDRESS_TABLE
+#define DIRECT_ADDRESS_TABLE
+#include "table.h"
 
 // A table where each item is stored in it's own key.
 // Keys must be unique.
 typedef struct directAdressTable {
 	int count; // Number of elemts currently in the table.
-	HashItem* hashArray[HASH_TABLE_SIZE];
+	HashItem* hashArray[TABLE_SIZE];
 } DirectAdressTable;
-
-HashItem createHashItem(int key, char c);
 
 DirectAdressTable createDirectAddressTable();
 
@@ -30,4 +23,5 @@ int directAddressDelete(DirectAdressTable* table, HashItem* item);
 // If there is no such item, returns NULL.
 HashItem* directAddressSearch(DirectAdressTable* table, int key);
 
-#endif // !HASH_TABLE
+#endif // !DIRECT_ADDRESS_TABLE
+

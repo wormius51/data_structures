@@ -6,7 +6,6 @@ typedef struct doubleLinkedNode {
 	struct doubleLinkedNode *next;
 	struct doubleLinkedNode *previous;
 	char c;
-
 } DoubleLinkedNode;
 
 typedef struct doubleLinkedList
